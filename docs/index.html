@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ставка — скачать</title>
+<meta name="description" content="Ставка: ставки по вкладам и накопительным счетам банков в одном списке, сравнение предложений и расчёт вашего дохода. Программа для Windows.">
+<!--
+  Страница «Скачать» для GitHub Pages репозитория выпусков (аудит ИИ-фабрики, п. 17, v1.690.0). Один файл, без сервера и без внешних библиотек; бесплатно.
+  КАК РАБОТАЕТ. Система человека определяется по браузеру: для Windows — большая кнопка на постоянный адрес последнего выпуска (releases/latest/download/StavkaApp-win-Setup.exe:
+  имя файла не меняется от выпуска к выпуску), для остальных систем — «пока нет». Номер версии браузер спрашивает у открытого API выпусков GitHub (если не ответил — страница работает без него).
+  ПОЧЕМУ ТАК. Новая платформа — это строка в массиве PLATFORMS ниже. Инструкция про окно Windows «Windows защитила ваш компьютер» нужна, потому что установщик пока не подписан (решение 07.11.2026).
+  Где лежит исходник: основной репозиторий, scripts/release/common/releases-site/; на GitHub Pages — папка docs/ репозитория выпусков.
+-->
+<style>
+  :root { --bg:#0f1420; --card:#171e2e; --line:#26304a; --fg:#e8ecf5; --muted:#9aa6c0; --accent:#3b82f6; --accent2:#2563eb; --ok:#34d399; }
+  @media (prefers-color-scheme: light) { :root { --bg:#f5f7fb; --card:#ffffff; --line:#dfe4ef; --fg:#162033; --muted:#5b6780; --accent:#2563eb; --accent2:#1d4ed8; --ok:#059669; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; padding-block:32px; padding-left:max(16px,env(safe-area-inset-left)); padding-right:max(16px,env(safe-area-inset-right)); }
+  main { max-width:760px; margin:0 auto; display:grid; gap:20px; }
+  h1 { font-size:2rem; margin:0; letter-spacing:-.01em; }
+  h2 { font-size:1.15rem; margin:0 0 8px; }
+  p { margin:0 0 8px; }
+  .lead { color:var(--muted); font-size:1.05rem; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; }
+  .btn { display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; padding:14px 22px; border-radius:12px; font-size:1.05rem; }
+  .btn:hover { background:var(--accent2); }
+  .muted { color:var(--muted); font-size:.92rem; }
+  .row { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  table { width:100%; border-collapse:collapse; font-size:.95rem; }
+  td, th { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .soon { color:var(--muted); }
+  ol { margin:8px 0 0; padding-left:1.2rem; } li { margin-bottom:6px; }
+  code { background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:1px 6px; font-size:.9em; }
+  .ver { color:var(--ok); font-weight:600; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Ставка</h1>
+    <p class="lead">Ставки по вкладам и накопительным счетам банков — одним списком. Сравнивайте предложения, ведите свои вклады и считайте доход, в том числе после налога. Программа обновляется сама.</p>
+  </header>
+
+  <section class="card" id="download">
+    <h2 id="platform-title">Скачать для Windows</h2>
+    <div class="row">
+      <a class="btn" id="main-button" href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Setup.exe">Скачать для Windows 10 / 11</a>
+      <span class="muted">Последняя версия: <span class="ver" id="version">—</span></span>
+    </div>
+    <p class="muted" id="platform-note">Установка для вас одного, права администратора не нужны.</p>
+  </section>
+
+  <section class="card">
+    <h2>Все варианты</h2>
+    <table>
+      <tr><th>Система</th><th>Файл</th><th>Для кого</th></tr>
+      <tr><td>Windows 10 / 11</td><td><a href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Setup.exe"><code>StavkaApp-win-Setup.exe</code></a></td><td>Рекомендуется всем</td></tr>
+      <tr><td>Windows 10 / 11</td><td><a href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win.msi"><code>StavkaApp-win.msi</code></a></td><td>Установка «для всех пользователей» (нужны права администратора)</td></tr>
+      <tr><td>Windows 10 / 11</td><td><a href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Portable.zip"><code>StavkaApp-win-Portable.zip</code></a></td><td>Без установки: распаковать и запустить</td></tr>
+      <tr class="soon"><td>macOS</td><td>—</td><td>пока нет</td></tr>
+      <tr class="soon"><td>Linux</td><td>—</td><td>пока нет</td></tr>
+      <tr class="soon"><td>Android / iPhone</td><td>—</td><td>пока нет</td></tr>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Первый запуск: окно «Windows защитила ваш компьютер»</h2>
+    <p>Установщик пока не подписан платным сертификатом, поэтому Windows при первом запуске осторожничает. Это не вирус — так Windows встречает любую новую программу без подписи.</p>
+    <ol>
+      <li>В синем окне нажмите мелкую надпись <b>«Подробнее»</b> — появится кнопка.</li>
+      <li>Нажмите <b>«Выполнить в любом случае»</b> — установка начнётся.</li>
+      <li>Нет кнопки? Щёлкните по файлу правой кнопкой → «Свойства» → внизу галочка <b>«Разблокировать»</b> → «ОК» и запустите снова.</li>
+    </ol>
+    <p class="muted">Показывается один раз при установке; сама программа и её обновления предупреждений не вызывают. Данные хранятся в <code>%LocalAppData%\StavkaData</code> и при обновлении сохраняются.</p>
+  </section>
+
+  <p class="muted">Если что-то не работает: в программе — значок шестерёнки → Справка → «Отчёт для разработчика…». Удалить: Параметры Windows → Приложения → «Ставка».</p>
+  <section class="card">
+    <h2>Как пользоваться</h2>
+    <p><a href="help/index.html">Справка</a> — короткие ответы на «как мне…?»: обновить ставки, добавить вклад, подтвердить выплату, узнать налог.</p>
+  </section>
+</main>
+
+<script>
+  // Новая платформа — новая строка здесь: имя, как узнать по браузеру, адрес файла (null — пока нет), подпись под кнопкой.
+  var PLATFORMS = [
+    { name: 'Windows', test: /Windows/i, url: 'https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Setup.exe', label: 'Скачать для Windows 10 / 11', note: 'Установка для вас одного, права администратора не нужны.' },
+    { name: 'macOS', test: /Macintosh|Mac OS/i, url: null },
+    { name: 'Android', test: /Android/i, url: null },
+    { name: 'iPhone', test: /iPhone|iPad/i, url: null },
+    { name: 'Linux', test: /Linux|X11/i, url: null }
+  ];
+  (function () {
+    var ua = navigator.userAgent || '';
+    var found = PLATFORMS.filter(function (p) { return p.test.test(ua); })[0];
+    var button = document.getElementById('main-button');
+    if (found && !found.url) {
+      document.getElementById('platform-title').textContent = 'Для ' + found.name + ' пока нет версии';
+      button.textContent = 'Версия для Windows — на всякий случай';
+      document.getElementById('platform-note').textContent = 'Программа сейчас есть только для Windows 10 / 11. Версии для других систем — в планах, сроков пока нет.';
+    }
+    // Номер версии — из открытого API выпусков GitHub; не ответил — страница работает без номера.
+    try {
+      fetch('https://api.github.com/repos/tulle-32/Project_Tulle_Stavka_Releases/releases/latest', { headers: { Accept: 'application/vnd.github+json' } })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { if (j && j.tag_name) { document.getElementById('version').textContent = j.tag_name.replace(/^v/, ''); } })
+        .catch(function () {});
+    } catch (e) {}
+  })();
+</script>
+</body>
+</html>
