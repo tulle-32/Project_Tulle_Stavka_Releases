@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как перенести даты в календарь телефона — справка «Ставки»</title>
+<!-- Собрано скриптом Claude/tools/docs/build-help.py из docs/user/ — руками не править. -->
+<style>
+  :root { --bg:#0f1420; --card:#171e2e; --line:#26304a; --fg:#e8ecf5; --muted:#9aa6c0; --accent:#3b82f6; }
+  @media (prefers-color-scheme: light) { :root { --bg:#f5f7fb; --card:#ffffff; --line:#dfe4ef; --fg:#162033; --muted:#5b6780; --accent:#2563eb; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; padding-block:28px; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px)); }
+  main { max-width:760px; margin:0 auto; }
+  h1 { font-size:1.8rem; margin:0 0 12px; letter-spacing:-.01em; text-wrap:balance; }
+  h2 { font-size:1.15rem; margin:24px 0 8px; }
+  a { color:var(--accent); }
+  .crumbs { color:var(--muted); font-size:.92rem; margin-bottom:16px; }
+  ol, ul { padding-left:1.3rem; } li { margin-bottom:6px; }
+  table { width:100%; border-collapse:collapse; font-size:.95rem; display:block; overflow-x:auto; }
+  td, th { text-align:left; padding:8px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  code { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px; font-size:.9em; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:10px; display:block; text-decoration:none; color:var(--fg); }
+  .card small { display:block; color:var(--muted); margin-top:2px; }
+</style>
+</head>
+<body>
+<main>
+<p class="crumbs"><a href="index.html">← Справка</a> · <a href="../index.html">Скачать «Ставку»</a></p>
+<h1>Как перенести даты в календарь телефона</h1>
+<p>Чтобы не пропустить окончание вклада и выплату процентов, пусть напоминание придёт из привычного календаря.</p>
+<h2>Что получите</h2>
+<p>Файл календаря (.ics) с датами окончания ваших вкладов и ближайших выплат. Он открывается в календаре телефона, Outlook и Google Календаре.</p>
+<h2>Шаги</h2>
+<ol><li>Откройте <strong>⚙</strong> и нажмите <strong>«Даты в календарь (.ics)…»</strong> (или <strong>Ctrl+K</strong> → «Экспорт в календарь (.ics)»). Сохраните файл и откройте его в календаре.</li><li>Чтобы файл обновлялся сам, включите <strong>«Держать файл календаря свежим»</strong>. Программа будет переписывать файл <code>calendar\stavka.ics</code> в папке данных при каждом изменении ваших продуктов. Подключите этот файл в календаре один раз. Пункт выключен по умолчанию.</li></ol>
+<p>Подписку по ссылке в интернете программа не создаёт: файл лежит только у вас на компьютере. В Outlook: <strong>«Добавить календарь → Из файла»</strong>.</p>
+<h2>Если не так</h2>
+<table><thead><tr><th>Что видите</th><th>Почему</th><th>Что делать</th></tr></thead><tbody><tr><td>Новые даты в календаре не появились</td><td>Календарь не перечитал файл</td><td>Откройте файл заново или обновите подключённый календарь</td></tr><tr><td>В файле нет вкладов</td><td>В «Портфеле» пусто</td><td><a href="dobavit-vklad.html">Добавьте вклад</a></td></tr></tbody></table>
+</main>
+</body>
+</html>

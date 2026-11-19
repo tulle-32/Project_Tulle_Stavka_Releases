@@ -3,89 +3,246 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ставка — скачать</title>
-<meta name="description" content="Ставка: ставки по вкладам и накопительным счетам банков в одном списке, сравнение предложений и расчёт вашего дохода. Программа для Windows.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#06080d">
+<title>Ставка — вклады, накопительные счета и портфель в одном окне</title>
+<meta name="description" content="Ставка: ставки по вкладам и накопительным счетам банков, ваш портфель, анализ «куда переложить деньги» и расчёт дохода после налога. Ваши данные остаются на вашем компьютере. Программа для Windows.">
 <!--
-  Страница «Скачать» для GitHub Pages репозитория выпусков (аудит ИИ-фабрики, п. 17, v1.690.0). Один файл, без сервера и без внешних библиотек; бесплатно.
-  КАК РАБОТАЕТ. Система человека определяется по браузеру: для Windows — большая кнопка на постоянный адрес последнего выпуска (releases/latest/download/StavkaApp-win-Setup.exe:
-  имя файла не меняется от выпуска к выпуску), для остальных систем — «пока нет». Номер версии браузер спрашивает у открытого API выпусков GitHub (если не ответил — страница работает без него).
-  ПОЧЕМУ ТАК. Новая платформа — это строка в массиве PLATFORMS ниже. Инструкция про окно Windows «Windows защитила ваш компьютер» нужна, потому что установщик пока не подписан (решение 07.11.2026).
+  Страница «Скачать» для GitHub Pages репозитория выпусков. Один файл, без сервера, без внешних шрифтов и библиотек (посетитель ничего не отдаёт сторонним сайтам).
+  ВИД. Только тёмная тема, «премиальный» вид: большая типографика, мягкое свечение, стекло, плавные появления (уважает prefers-reduced-motion). Окно программы в первом экране нарисовано
+  разметкой с ВЫМЫШЛЕННЫМИ данными («Банк „Север“…»), а не снимком: на снимках с компьютера разработчика настоящие суммы и банки, публиковать их нельзя.
+  КАК РАБОТАЕТ. Система человека определяется по браузеру: для Windows — большая кнопка на постоянный адрес последнего выпуска (releases/latest/download/StavkaApp-win-Setup.exe: имя файла
+  не меняется от выпуска к выпуску), для остальных систем — «пока нет». Номер версии и «что нового» браузер спрашивает у открытого API выпусков GitHub (не ответил — страница работает без них).
+  ПОЧЕМУ ТАК. Новая платформа — строка в массиве PLATFORMS внизу. Инструкция про окно «Windows защитила ваш компьютер» нужна, потому что установщик пока не подписан (решение 07.11.2026).
   Где лежит исходник: основной репозиторий, scripts/release/common/releases-site/; на GitHub Pages — папка docs/ репозитория выпусков.
 -->
 <style>
-  :root { --bg:#0f1420; --card:#171e2e; --line:#26304a; --fg:#e8ecf5; --muted:#9aa6c0; --accent:#3b82f6; --accent2:#2563eb; --ok:#34d399; }
-  @media (prefers-color-scheme: light) { :root { --bg:#f5f7fb; --card:#ffffff; --line:#dfe4ef; --fg:#162033; --muted:#5b6780; --accent:#2563eb; --accent2:#1d4ed8; --ok:#059669; } }
-  * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; padding-block:32px; padding-left:max(16px,env(safe-area-inset-left)); padding-right:max(16px,env(safe-area-inset-right)); }
-  main { max-width:760px; margin:0 auto; display:grid; gap:20px; }
-  h1 { font-size:2rem; margin:0; letter-spacing:-.01em; }
-  h2 { font-size:1.15rem; margin:0 0 8px; }
-  p { margin:0 0 8px; }
-  .lead { color:var(--muted); font-size:1.05rem; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; }
-  .btn { display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; padding:14px 22px; border-radius:12px; font-size:1.05rem; }
-  .btn:hover { background:var(--accent2); }
-  .muted { color:var(--muted); font-size:.92rem; }
-  .row { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
-  table { width:100%; border-collapse:collapse; font-size:.95rem; }
-  td, th { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
-  .soon { color:var(--muted); }
-  ol { margin:8px 0 0; padding-left:1.2rem; } li { margin-bottom:6px; }
-  code { background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:1px 6px; font-size:.9em; }
-  .ver { color:var(--ok); font-weight:600; }
+  :root {
+    --bg:#06080d; --bg2:#0b0f18; --surface:rgba(255,255,255,.04); --surface2:rgba(255,255,255,.07); --line:rgba(255,255,255,.09);
+    --fg:#f2f5fb; --muted:#9aa5bd; --dim:#6b7690; --accent:#4f8cff; --accent2:#7aa8ff; --ok:#3ddc97; --warn:#f5b84b;
+    --radius:20px;
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    margin:0; background:var(--bg); color:var(--fg);
+    font:17px/1.6 "SF Pro Text","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,sans-serif; -webkit-font-smoothing:antialiased;
+    padding-left:max(0px,env(safe-area-inset-left)); padding-right:max(0px,env(safe-area-inset-right));
+  }
+  .glow { position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:radial-gradient(900px 520px at 78% -8%, rgba(79,140,255,.20), transparent 62%), radial-gradient(700px 480px at 8% 4%, rgba(61,220,151,.09), transparent 60%); }
+  a { color:var(--accent2); text-decoration:none; } a:hover { text-decoration:underline; }
+  .wrap { width:100%; max-width:1120px; margin:0 auto; padding-inline:max(20px,env(safe-area-inset-left)) max(20px,env(safe-area-inset-right)); }
+  h1,h2,h3 { font-family:"SF Pro Display","Segoe UI Variable Display","Segoe UI",system-ui,sans-serif; letter-spacing:-.025em; text-wrap:balance; margin:0; }
+
+  /* шапка */
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(1.6) blur(18px); background:rgba(6,8,13,.72); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; align-items:center; gap:24px; height:60px; }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:700; color:var(--fg); font-size:1.05rem; }
+  .logo { width:26px; height:26px; border-radius:8px; background:linear-gradient(135deg,#4f8cff,#7c5cff); display:grid; place-items:center; font-size:15px; font-weight:800; color:#fff; }
+  nav .links { margin-left:auto; display:flex; gap:22px; font-size:.95rem; } nav .links a { color:var(--muted); } nav .links a:hover { color:var(--fg); text-decoration:none; }
+  .pill { display:inline-flex; align-items:center; gap:8px; padding:9px 18px; border-radius:999px; background:var(--fg); color:#06080d; font-weight:650; font-size:.95rem; }
+  .pill:hover { text-decoration:none; background:#fff; }
+
+  /* первый экран */
+  .hero { padding-block:84px 40px; text-align:center; }
+  .eyebrow { display:inline-flex; gap:8px; align-items:center; padding:6px 14px; border:1px solid var(--line); border-radius:999px; background:var(--surface); color:var(--muted); font-size:.88rem; }
+  .eyebrow i { width:7px; height:7px; border-radius:50%; background:var(--ok); box-shadow:0 0 12px var(--ok); }
+  .hero h1 { font-size:clamp(2.5rem,7vw,5rem); line-height:1.04; margin:22px auto 0; max-width:17ch; font-weight:750; }
+  .hero h1 em { font-style:normal; background:linear-gradient(100deg,#7aa8ff,#3ddc97); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero .lead { color:var(--muted); font-size:clamp(1.05rem,2vw,1.28rem); max-width:44rem; margin:22px auto 0; }
+  .cta { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:34px; }
+  .btn { display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border-radius:14px; font-weight:650; font-size:1.05rem; color:#fff; background:linear-gradient(180deg,#5a97ff,#3f78e8); box-shadow:0 10px 36px rgba(79,140,255,.35), inset 0 1px 0 rgba(255,255,255,.25); }
+  .btn:hover { text-decoration:none; filter:brightness(1.08); }
+  .btn.ghost { background:var(--surface2); box-shadow:none; border:1px solid var(--line); color:var(--fg); }
+  .meta { margin-top:16px; color:var(--dim); font-size:.9rem; } .meta b { color:var(--ok); font-weight:600; }
+
+  /* окно программы (нарисовано разметкой, данные вымышленные) */
+  .stage { margin-top:56px; perspective:1600px; }
+  .win { max-width:960px; margin:0 auto; border-radius:18px; border:1px solid var(--line); background:linear-gradient(180deg,#0f1522,#0a0e17); overflow:hidden;
+    box-shadow:0 40px 120px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.03), 0 0 140px rgba(79,140,255,.16); text-align:left; transform:rotateX(4deg); transform-origin:50% 0; }
+  .win .bar { display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-size:.85rem; }
+  .dots { display:flex; gap:6px; } .dots span { width:11px; height:11px; border-radius:50%; background:#2a3347; }
+  .win .body { display:grid; grid-template-columns:170px 1fr; min-height:340px; }
+  .side { border-right:1px solid var(--line); padding:14px 10px; display:grid; gap:4px; align-content:start; font-size:.9rem; color:var(--muted); }
+  .side div { padding:8px 12px; border-radius:10px; } .side .on { background:rgba(79,140,255,.16); color:#cfe0ff; font-weight:600; }
+  .main { padding:18px 20px; display:grid; gap:14px; align-content:start; }
+  .kpis { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:12px; }
+  .kpi { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px; }
+  .kpi small { color:var(--dim); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; }
+  .kpi b { display:block; font-size:1.55rem; letter-spacing:-.02em; font-variant-numeric:tabular-nums; } .kpi .g { color:var(--ok); }
+  table.mock { width:100%; border-collapse:collapse; font-size:.86rem; font-variant-numeric:tabular-nums; }
+  .mock th { text-align:left; color:var(--dim); font-weight:500; padding:6px 8px; font-size:.74rem; letter-spacing:.05em; text-transform:uppercase; }
+  .mock td { padding:8px; border-top:1px solid var(--line); } .mock td:nth-child(3) { color:var(--ok); font-weight:650; }
+  .tag { font-size:.7rem; padding:2px 8px; border-radius:999px; background:rgba(245,184,75,.14); color:var(--warn); margin-left:6px; }
+  .note { text-align:center; margin-top:14px; color:var(--dim); font-size:.82rem; }
+
+  /* разделы */
+  section { padding-block:84px 0; }
+  .kicker { color:var(--accent2); font-weight:650; font-size:.9rem; letter-spacing:.08em; text-transform:uppercase; }
+  .sec-title { font-size:clamp(1.9rem,4.5vw,3rem); margin-top:10px; max-width:20ch; font-weight:720; line-height:1.1; }
+  .sec-lead { color:var(--muted); max-width:42rem; margin-top:16px; font-size:1.1rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:16px; margin-top:40px; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px; transition:border-color .2s, transform .2s, background .2s; }
+  .card:hover { border-color:rgba(255,255,255,.18); background:var(--surface2); transform:translateY(-2px); }
+  .card .ic { width:40px; height:40px; border-radius:12px; display:grid; place-items:center; font-size:1.2rem; background:rgba(79,140,255,.14); margin-bottom:14px; }
+  .card h3 { font-size:1.2rem; margin-bottom:8px; } .card p { margin:0; color:var(--muted); font-size:.99rem; }
+  .privacy { display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:center; background:linear-gradient(135deg,rgba(61,220,151,.09),rgba(79,140,255,.08)); border:1px solid var(--line); border-radius:28px; padding:clamp(26px,5vw,56px); }
+  .privacy ul { list-style:none; margin:0; padding:0; display:grid; gap:12px; }
+  .privacy li { display:flex; gap:12px; color:var(--muted); } .privacy li::before { content:"✓"; color:var(--ok); font-weight:800; }
+
+  /* скачать */
+  .dl { text-align:center; background:radial-gradient(600px 300px at 50% 0, rgba(79,140,255,.18), transparent 70%), var(--surface); border:1px solid var(--line); border-radius:28px; padding:clamp(30px,6vw,64px) 20px; }
+  .dl h2 { font-size:clamp(1.9rem,4.5vw,3rem); } .dl p { color:var(--muted); max-width:36rem; margin:14px auto 0; }
+  table.files { width:100%; border-collapse:collapse; margin-top:28px; font-size:.95rem; text-align:left; }
+  .files th,.files td { padding:12px 10px; border-bottom:1px solid var(--line); vertical-align:top; } .files th { color:var(--dim); font-weight:500; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; }
+  .files .soon { color:var(--dim); }
+  code { background:rgba(255,255,255,.07); border:1px solid var(--line); border-radius:7px; padding:1px 7px; font-size:.88em; }
+  .scroll { overflow-x:auto; }
+  details { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:4px 22px; margin-top:12px; }
+  summary { cursor:pointer; padding:16px 0; font-weight:620; list-style:none; display:flex; justify-content:space-between; gap:12px; } summary::after { content:"+"; color:var(--muted); font-size:1.3rem; line-height:1; } details[open] summary::after { content:"–"; }
+  details p, details ol { color:var(--muted); margin:0 0 16px; } details ol { padding-left:1.3rem; } details li { margin-bottom:6px; }
+  #news ul { margin:12px 0 0; padding-left:1.2rem; color:var(--muted); } #news li { margin-bottom:6px; } #news h3 { font-size:1.05rem; margin-top:14px; }
+  footer { padding-block:72px 48px; color:var(--dim); font-size:.9rem; text-align:center; }
+  footer a { color:var(--muted); }
+  @media (max-width:760px) {
+    nav .links a:not(.pill) { display:none; } .hero { padding-top:56px; } .win { transform:none; } .win .body { grid-template-columns:1fr; } .side { display:none; }
+    .kpis { grid-template-columns:1fr 1fr; } .kpis .kpi:first-child { grid-column:1/-1; } .privacy { grid-template-columns:1fr; } .mock .hide-s { display:none; }
+  }
+  .rv { opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; } .rv.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .rv { opacity:1; transform:none; transition:none; } .card:hover { transform:none; } }
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <h1>Ставка</h1>
-    <p class="lead">Ставки по вкладам и накопительным счетам банков — одним списком. Сравнивайте предложения, ведите свои вклады и считайте доход, в том числе после налога. Программа обновляется сама.</p>
-  </header>
+<div class="glow" aria-hidden="true"></div>
 
-  <section class="card" id="download">
-    <h2 id="platform-title">Скачать для Windows</h2>
-    <div class="row">
-      <a class="btn" id="main-button" href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Setup.exe">Скачать для Windows 10 / 11</a>
-      <span class="muted">Последняя версия: <span class="ver" id="version">—</span></span>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="logo">%</span>Ставка</a>
+    <div class="links">
+      <a href="#features">Возможности</a>
+      <a href="#privacy">Конфиденциальность</a>
+      <a href="help/index.html">Справка</a>
+      <a class="pill" href="#download">Скачать</a>
     </div>
-    <p class="muted" id="platform-note">Установка для вас одного, права администратора не нужны.</p>
-  </section>
+  </div>
+</nav>
 
-  <section class="card">
-    <h2>Все варианты</h2>
-    <table>
+<header class="hero wrap" id="top">
+  <span class="eyebrow"><i></i> Для Windows 10 и 11 · России, Беларуси, Молдовы и Казахстана</span>
+  <h1>Вклады, счета и портфель — <em>в одном окне</em></h1>
+  <p class="lead">Ставки по вкладам и накопительным счетам больше сотни банков, ваш личный портфель и анализ, который подсказывает, как заработать больше: куда переложить деньги, что будет, если ставки упадут, как не выйти за страховой лимит. Всё хранится только у вас на компьютере.</p>
+  <div class="cta">
+    <a class="btn" id="main-button" href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Setup.exe">Скачать для Windows</a>
+    <a class="btn ghost" href="#features">Что умеет</a>
+  </div>
+  <p class="meta" id="platform-note">Последняя версия <b id="version">—</b> · установка для вас одного, права администратора не нужны</p>
+
+  <div class="stage rv" aria-hidden="true">
+    <div class="win">
+      <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span>Ставка · Главное</span></div>
+      <div class="body">
+        <div class="side"><div class="on">Главное</div><div>Ставки</div><div>Портфель</div><div>Выплаты</div><div>Анализ</div><div>История</div></div>
+        <div class="main">
+          <div class="kpis">
+            <div class="kpi"><small>В продуктах</small><b>1 250 000 ₽</b><small>6 продуктов в 4 банках</small></div>
+            <div class="kpi"><small>Приносят в месяц</small><b class="g">~14 800 ₽</b><small>без налога</small></div>
+            <div class="kpi"><small>Ближайшая выплата</small><b>15 дек.</b><small>~3 100 ₽</small></div>
+          </div>
+          <table class="mock">
+            <tr><th>Банк</th><th class="hide-s">Продукт</th><th>Ставка</th><th>Срок</th><th>Доход за срок</th></tr>
+            <tr><td>Банк «Север»</td><td class="hide-s">Накопительный +<span class="tag">акция</span></td><td>16,50 %</td><td>365 дн.</td><td>~82 500 ₽</td></tr>
+            <tr><td>Банк «Волга»</td><td class="hide-s">Доходный</td><td>15,90 %</td><td>181 дн.</td><td>~39 400 ₽</td></tr>
+            <tr><td>Банк «Урал»</td><td class="hide-s">Сезонный</td><td>15,20 %</td><td>91 дн.</td><td>~18 900 ₽</td></tr>
+            <tr><td>Банк «Алтай»</td><td class="hide-s">Классический</td><td>14,75 %</td><td>366 дн.</td><td>~73 700 ₽</td></tr>
+            <tr><td>Банк «Волга»</td><td class="hide-s">Накопительный счёт<span class="tag">счёт</span></td><td>14,00 %</td><td>без срока</td><td>~1 150 ₽ в мес.</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p class="note">Иллюстрация: банки и суммы вымышленные.</p>
+  </div>
+</header>
+
+<section id="features" class="wrap">
+  <span class="kicker">Возможности</span>
+  <h2 class="sec-title">Не только ставки: портфель, счета и анализ</h2>
+  <p class="sec-lead">Программа собирает ставки с сайтов банков, ведёт ваши деньги в одном месте и помогает зарабатывать больше: показывает, где выгоднее именно на вашу сумму и срок, и что с этим делать дальше.</p>
+  <div class="grid">
+    <div class="card rv"><div class="ic">📈</div><h3>Сравнение ставок</h3><p>Предложения банков в одной таблице: фильтры по сроку, сумме и условиям, сортировка по реальному доходу за ваш срок, а не по красивой цифре.</p></div>
+    <div class="card rv"><div class="ic">💼</div><h3>Ваш портфель</h3><p>Вклады и накопительные счета в одном списке: итог, доход в месяц, ближайшие окончания, пополнения и снятия. Видно, сколько вы заработали и сколько ещё получите.</p></div>
+    <div class="card rv"><div class="ic">🏦</div><h3>Накопительные счета</h3><p>Ставки счетов сравниваются рядом с вкладами; плавающая ставка и акции учитываются. Счёт можно держать в портфеле и следить, когда банк снизит ставку.</p></div>
+    <div class="card rv"><div class="ic">💡</div><h3>Анализ: как заработать больше</h3><p>«Куда переложить»: где ставка выше вашей. «Что если ставки упадут»: сколько потеряете и что зафиксировать. Лесенка вкладов, здоровье портфеля и реальная доходность с учётом инфляции.</p></div>
+    <div class="card rv"><div class="ic">🧮</div><h3>Доход и налог</h3><p>Расчёт дохода с капитализацией и оценка налога на проценты по правилам года — с понятным объяснением, как всё посчитано.</p></div>
+    <div class="card rv"><div class="ic">📅</div><h3>Выплаты и календарь</h3><p>Когда и сколько придёт на карту. Подтверждайте полученные выплаты и сверяйте с расчётом, чтобы банк не «забыл» проценты.</p></div>
+    <div class="card rv"><div class="ic">🛡️</div><h3>Страхование вкладов</h3><p>В России видно, какая часть денег в банке сверх страхового лимита АСВ, — до того, как это станет проблемой.</p></div>
+    <div class="card rv"><div class="ic">💱</div><h3>Валюты и курсы</h3><p>Калькулятор валют по официальным курсам центробанков: сколько ваши рубли в долларах, евро или тенге. Итог портфеля можно показать в любой валюте.</p></div>
+    <div class="card rv"><div class="ic">🌍</div><h3>Страны и языки</h3><p>Россия, Беларусь, Молдова, Казахстан — со своей валютой. Интерфейс на русском, английском, белорусском, румынском и казахском.</p></div>
+  </div>
+</section>
+
+<section id="privacy" class="wrap">
+  <div class="privacy rv">
+    <div>
+      <span class="kicker">Конфиденциальность</span>
+      <h2 class="sec-title" style="max-width:14ch">Ваши деньги — ваше дело</h2>
+      <p class="sec-lead">Никаких аккаунтов и облака. Программа работает на вашем компьютере, а данные о ваших вкладах никуда не отправляются.</p>
+    </div>
+    <ul>
+      <li>Данные лежат в папке на вашем компьютере и при обновлении сохраняются</li>
+      <li>Нет регистрации, паролей и входа через сторонние сервисы</li>
+      <li>Можно закрыть программу ПИН-кодом и скрыть суммы одним щелчком</li>
+      <li>Резервная копия — по расписанию и с шифрованием</li>
+      <li>Отчёт разработчику — только если вы сами нажали «Отправить»</li>
+    </ul>
+  </div>
+</section>
+
+<section id="download" class="wrap">
+  <div class="dl rv">
+    <span class="kicker">Скачать</span>
+    <h2 id="platform-title" style="margin-top:10px">Ставка для Windows</h2>
+    <p>Windows 10 и 11. Установка занимает около минуты, программа обновляется сама.</p>
+    <div class="cta"><a class="btn" id="main-button-2" href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Setup.exe">Скачать установщик</a>
+      <a class="btn ghost" href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases">Все версии</a></div>
+    <div class="scroll"><table class="files">
       <tr><th>Система</th><th>Файл</th><th>Для кого</th></tr>
       <tr><td>Windows 10 / 11</td><td><a href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Setup.exe"><code>StavkaApp-win-Setup.exe</code></a></td><td>Рекомендуется всем</td></tr>
       <tr><td>Windows 10 / 11</td><td><a href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win.msi"><code>StavkaApp-win.msi</code></a></td><td>Установка «для всех пользователей» (нужны права администратора)</td></tr>
       <tr><td>Windows 10 / 11</td><td><a href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Portable.zip"><code>StavkaApp-win-Portable.zip</code></a></td><td>Без установки: распаковать и запустить</td></tr>
-      <tr class="soon"><td>macOS</td><td>—</td><td>пока нет</td></tr>
-      <tr class="soon"><td>Linux</td><td>—</td><td>пока нет</td></tr>
-      <tr class="soon"><td>Android / iPhone</td><td>—</td><td>пока нет</td></tr>
-    </table>
-  </section>
+      <tr class="soon"><td>macOS · Linux · Android · iPhone</td><td>—</td><td>пока нет, сроков не обещаем</td></tr>
+    </table></div>
+  </div>
 
-  <section class="card">
-    <h2>Первый запуск: окно «Windows защитила ваш компьютер»</h2>
+  <details>
+    <summary>Первый запуск: окно «Windows защитила ваш компьютер»</summary>
     <p>Установщик пока не подписан платным сертификатом, поэтому Windows при первом запуске осторожничает. Это не вирус — так Windows встречает любую новую программу без подписи.</p>
     <ol>
       <li>В синем окне нажмите мелкую надпись <b>«Подробнее»</b> — появится кнопка.</li>
       <li>Нажмите <b>«Выполнить в любом случае»</b> — установка начнётся.</li>
       <li>Нет кнопки? Щёлкните по файлу правой кнопкой → «Свойства» → внизу галочка <b>«Разблокировать»</b> → «ОК» и запустите снова.</li>
     </ol>
-    <p class="muted">Показывается один раз при установке; сама программа и её обновления предупреждений не вызывают. Данные хранятся в <code>%LocalAppData%\StavkaData</code> и при обновлении сохраняются.</p>
-  </section>
+    <p>Показывается один раз при установке; сама программа и её обновления предупреждений не вызывают. Данные хранятся в <code>%LocalAppData%\StavkaData</code> и при обновлении сохраняются.</p>
+  </details>
+  <details id="news" hidden>
+    <summary>Что нового в последней версии</summary>
+    <div id="news-body"></div>
+  </details>
+  <details>
+    <summary>Если что-то не работает или нужно удалить</summary>
+    <p>В программе: значок шестерёнки → Справка → «Отчёт для разработчика…». Удалить: Параметры Windows → Приложения → «Ставка». Короткие ответы на вопросы «как мне…?» — в <a href="help/index.html">справке</a>.</p>
+  </details>
+</section>
 
-  <p class="muted">Если что-то не работает: в программе — значок шестерёнки → Справка → «Отчёт для разработчика…». Удалить: Параметры Windows → Приложения → «Ставка».</p>
-  <section class="card">
-    <h2>Как пользоваться</h2>
-    <p><a href="help/index.html">Справка</a> — короткие ответы на «как мне…?»: обновить ставки, добавить вклад, подтвердить выплату, узнать налог.</p>
-  </section>
-</main>
+<footer class="wrap">
+  <p>Ставка · вклады, накопительные счета, портфель и анализ · <a href="help/index.html">Справка</a> · <a href="https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases">Выпуски</a></p>
+  <p>Программа носит справочный характер и не является финансовой консультацией. Ставки собираются с публичных сайтов банков; точные условия уточняйте в банке.</p>
+</footer>
 
 <script>
   // Новая платформа — новая строка здесь: имя, как узнать по браузеру, адрес файла (null — пока нет), подпись под кнопкой.
   var PLATFORMS = [
-    { name: 'Windows', test: /Windows/i, url: 'https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Setup.exe', label: 'Скачать для Windows 10 / 11', note: 'Установка для вас одного, права администратора не нужны.' },
+    { name: 'Windows', test: /Windows/i, url: 'https://github.com/tulle-32/Project_Tulle_Stavka_Releases/releases/latest/download/StavkaApp-win-Setup.exe', label: 'Скачать для Windows' },
     { name: 'macOS', test: /Macintosh|Mac OS/i, url: null },
     { name: 'Android', test: /Android/i, url: null },
     { name: 'iPhone', test: /iPhone|iPad/i, url: null },
@@ -94,17 +251,44 @@
   (function () {
     var ua = navigator.userAgent || '';
     var found = PLATFORMS.filter(function (p) { return p.test.test(ua); })[0];
-    var button = document.getElementById('main-button');
     if (found && !found.url) {
       document.getElementById('platform-title').textContent = 'Для ' + found.name + ' пока нет версии';
-      button.textContent = 'Версия для Windows — на всякий случай';
+      document.getElementById('main-button').textContent = 'Версия для Windows — на всякий случай';
       document.getElementById('platform-note').textContent = 'Программа сейчас есть только для Windows 10 / 11. Версии для других систем — в планах, сроков пока нет.';
     }
-    // Номер версии — из открытого API выпусков GitHub; не ответил — страница работает без номера.
+    // Плавное появление блоков при прокрутке.
+    var items = document.querySelectorAll('.rv');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12 });
+      items.forEach(function (el) { io.observe(el); });
+    } else { items.forEach(function (el) { el.classList.add('in'); }); }
+    // Номер версии и «что нового» — из открытого API выпусков GitHub; не ответил — страница работает без них.
     try {
       fetch('https://api.github.com/repos/tulle-32/Project_Tulle_Stavka_Releases/releases/latest', { headers: { Accept: 'application/vnd.github+json' } })
         .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (j) { if (j && j.tag_name) { document.getElementById('version').textContent = j.tag_name.replace(/^v/, ''); } })
+        .then(function (j) {
+          if (!j) { return; }
+          if (j.tag_name) {
+            var v = document.getElementById('version');
+            if (v) { v.textContent = j.tag_name.replace(/^v/, ''); }
+          }
+          // Описание выпуска — простой текст: «- пункт» становится списком, строка со значком — подзаголовком.
+          if (j.body) {
+            var box = document.getElementById('news-body'), list = null, count = 0;
+            j.body.split(/\r?\n/).forEach(function (line) {
+              line = line.trim();
+              if (!line || count > 24) { return; }
+              if (/^[-*]\s+/.test(line)) {
+                if (!list) { list = document.createElement('ul'); box.appendChild(list); }
+                var li = document.createElement('li'); li.textContent = line.replace(/^[-*]\s+/, '').replace(/\*\*/g, ''); list.appendChild(li); count++;
+              } else {
+                list = null;
+                var h = document.createElement(/^(✨|🔧|##)/.test(line) ? 'h3' : 'p'); h.textContent = line.replace(/^#+\s*/, '').replace(/\*\*/g, ''); box.appendChild(h); count++;
+              }
+            });
+            if (box.childNodes.length) { document.getElementById('news').hidden = false; }
+          }
+        })
         .catch(function () {});
     } catch (e) {}
   })();
