@@ -5,22 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Как поставить цель накопления — справка «Ставки»</title>
 <link rel="icon" type="image/png" href="../favicon.png">
+<link rel="stylesheet" href="../theme.css">
+<script src="../theme.js"></script>
 <!-- Собрано скриптом Claude/tools/docs/build-help.py из docs/user/ — руками не править. -->
 <style>
-  :root { --bg:#06080d; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.09); --fg:#f2f5fb; --muted:#9aa5bd; --accent:#7aa8ff; color-scheme:dark; }
+  :root { --card:var(--surface); } /* цвета — в ../theme.css (тёмная, светлая, розовая) */
   * { box-sizing: border-box; }
   body { margin:0; background:var(--bg); color:var(--fg); font:17px/1.65 "SF Pro Text","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,sans-serif; -webkit-font-smoothing:antialiased; padding-left:max(0px,env(safe-area-inset-left,0px)); padding-right:max(0px,env(safe-area-inset-right,0px)); }
-  .glow { position:fixed; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(900px 520px at 78% -8%, rgba(79,140,255,.20), transparent 62%), radial-gradient(700px 480px at 8% 4%, rgba(61,220,151,.09), transparent 60%); }
-  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(1.6) blur(18px); background:rgba(6,8,13,.72); border-bottom:1px solid var(--line); margin-bottom:28px; }
+  .glow { position:fixed; inset:0; z-index:-1; pointer-events:none; background:var(--glow); }
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(1.6) blur(18px); background:var(--nav); border-bottom:1px solid var(--line); margin-bottom:28px; }
   nav .bar { max-width:1120px; margin:0 auto; display:flex; align-items:center; gap:24px; height:60px; padding-inline:max(20px,env(safe-area-inset-left,0px)) max(20px,env(safe-area-inset-right,0px)); }
   .brand { display:flex; align-items:center; gap:10px; font-weight:700; color:var(--fg); font-size:1.05rem; text-decoration:none; }
   .brand img { width:28px; height:28px; border-radius:8px; display:block; }
-  nav .links { margin-left:auto; display:flex; gap:20px; font-size:.95rem; }
+  nav .links { margin-left:auto; display:flex; align-items:center; gap:20px; font-size:.95rem; }
   nav .links a { color:var(--muted); text-decoration:none; } nav .links a:hover { color:var(--fg); }
   main { max-width:760px; margin:0 auto; padding:0 max(16px,env(safe-area-inset-left,0px)) 56px; }
   h1 { font-size:2rem; margin:0 0 14px; letter-spacing:-.025em; text-wrap:balance; }
   h2 { font-size:1.2rem; margin:28px 0 8px; letter-spacing:-.015em; }
-  a { color:var(--accent); }
+  a { color:var(--accent2); }
   .crumbs { color:var(--muted); font-size:.92rem; margin-bottom:16px; }
   ol, ul { padding-left:1.3rem; } li { margin-bottom:6px; }
   table { width:100%; border-collapse:collapse; font-size:.95rem; display:block; overflow-x:auto; }
@@ -28,13 +30,13 @@
   th { color:var(--muted); font-weight:600; }
   code { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px; font-size:.9em; }
   .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-bottom:10px; display:block; text-decoration:none; color:var(--fg); transition:background .15s, border-color .15s; }
-  .card:hover { background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.16); }
+  .card:hover { background:var(--surface2); border-color:var(--line-hover); }
   .card small { display:block; color:var(--muted); margin-top:2px; }
 </style>
 </head>
 <body>
 <div class="glow"></div>
-<nav><div class="bar"><a class="brand" href="../index.html"><img src="../icon-64.png" alt="">Ставка</a><div class="links"><a href="index.html">Справка</a><a href="../index.html#download">Скачать</a></div></div></nav>
+<nav><div class="bar"><a class="brand" href="../index.html"><img src="../icon-64.png" alt="">Ставка</a><div class="links"><a href="index.html">Справка</a><a href="../index.html#download">Скачать</a><span class="themes" role="group" aria-label="Оформление"></span></div></div></nav>
 <main>
 <p class="crumbs"><a href="index.html">← Справка</a> · <a href="../index.html">Скачать «Ставку»</a></p>
 <h1>Как поставить цель накопления</h1>

@@ -1,0 +1,48 @@
+/* Цветовые темы сайта «Ставка»: тёмная (по умолчанию), светлая и розовая. Подключается и страницей «Скачать», и справкой — палитра в одном месте.
+   Как работает: тема — это набор переменных на <html data-theme="…">; выбранную тему запоминает theme.js (localStorage) и ставит её до отрисовки, поэтому вспышки нет.
+   Новая тема — новый блок :root[data-theme="имя"] с тем же набором переменных + кнопка в массиве THEMES файла theme.js. */
+:root, :root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:#06080d; --surface:rgba(255,255,255,.04); --surface2:rgba(255,255,255,.07); --line:rgba(255,255,255,.09); --line-hover:rgba(255,255,255,.18);
+  --fg:#f2f5fb; --muted:#9aa5bd; --dim:#6b7690; --accent:#4f8cff; --accent2:#7aa8ff; --ok:#3ddc97; --warn:#f5b84b;
+  --nav:rgba(6,8,13,.72); --pill-bg:#f2f5fb; --pill-fg:#06080d; --pill-hover:#ffffff;
+  --glow:radial-gradient(900px 520px at 78% -8%, rgba(79,140,255,.20), transparent 62%), radial-gradient(700px 480px at 8% 4%, rgba(61,220,151,.09), transparent 60%);
+  --grad:linear-gradient(100deg,#7aa8ff,#3ddc97);
+  --btn-bg:linear-gradient(180deg,#5a97ff,#3f78e8); --btn-fg:#fff; --btn-shadow:0 10px 36px rgba(79,140,255,.35), inset 0 1px 0 rgba(255,255,255,.25);
+  --win-bg:linear-gradient(180deg,#0f1522,#0a0e17); --win-shadow:0 40px 120px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.03), 0 0 140px rgba(79,140,255,.16); --dots:#2a3347;
+  --side-on-bg:rgba(79,140,255,.16); --side-on-fg:#cfe0ff; --tag-bg:rgba(245,184,75,.14); --icon-bg:rgba(79,140,255,.14);
+  --privacy-bg:linear-gradient(135deg,rgba(61,220,151,.09),rgba(79,140,255,.08)); --dl-bg:radial-gradient(600px 300px at 50% 0, rgba(79,140,255,.18), transparent 70%); --code-bg:rgba(255,255,255,.07);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg:#f6f8fc; --surface:rgba(15,23,42,.04); --surface2:rgba(15,23,42,.07); --line:rgba(15,23,42,.11); --line-hover:rgba(15,23,42,.22);
+  --fg:#0f172a; --muted:#475569; --dim:#64748b; --accent:#2563eb; --accent2:#1d4ed8; --ok:#0b8f60; --warn:#a8680f;
+  --nav:rgba(246,248,252,.8); --pill-bg:#0f172a; --pill-fg:#ffffff; --pill-hover:#1e293b;
+  --glow:radial-gradient(900px 520px at 78% -8%, rgba(37,99,235,.12), transparent 62%), radial-gradient(700px 480px at 8% 4%, rgba(11,143,96,.07), transparent 60%);
+  --grad:linear-gradient(100deg,#2563eb,#0b8f60);
+  --btn-bg:linear-gradient(180deg,#3b82f6,#2563eb); --btn-fg:#fff; --btn-shadow:0 10px 30px rgba(37,99,235,.28), inset 0 1px 0 rgba(255,255,255,.3);
+  --win-bg:linear-gradient(180deg,#ffffff,#f1f5fb); --win-shadow:0 30px 80px rgba(15,23,42,.16), 0 0 0 1px rgba(15,23,42,.04); --dots:#cbd5e1;
+  --side-on-bg:rgba(37,99,235,.12); --side-on-fg:#1d4ed8; --tag-bg:rgba(168,104,15,.14); --icon-bg:rgba(37,99,235,.10);
+  --privacy-bg:linear-gradient(135deg,rgba(11,143,96,.08),rgba(37,99,235,.06)); --dl-bg:radial-gradient(600px 300px at 50% 0, rgba(37,99,235,.10), transparent 70%); --code-bg:rgba(15,23,42,.06);
+}
+:root[data-theme="pink"] {
+  color-scheme: light;
+  --bg:#fff4f8; --surface:rgba(224,54,139,.05); --surface2:rgba(224,54,139,.09); --line:rgba(224,54,139,.17); --line-hover:rgba(224,54,139,.32);
+  --fg:#3b0d24; --muted:#8a4f69; --dim:#b07a93; --accent:#e0368b; --accent2:#c81e78; --ok:#0f9a76; --warn:#b86e0c;
+  --nav:rgba(255,244,248,.82); --pill-bg:#e0368b; --pill-fg:#ffffff; --pill-hover:#c81e78;
+  --glow:radial-gradient(900px 520px at 78% -8%, rgba(255,111,177,.28), transparent 62%), radial-gradient(700px 480px at 8% 4%, rgba(168,85,247,.13), transparent 60%);
+  --grad:linear-gradient(100deg,#f0489d,#a855f7);
+  --btn-bg:linear-gradient(180deg,#ff6fb1,#e0368b); --btn-fg:#fff; --btn-shadow:0 10px 32px rgba(224,54,139,.34), inset 0 1px 0 rgba(255,255,255,.35);
+  --win-bg:linear-gradient(180deg,#ffffff,#ffeaf3); --win-shadow:0 30px 80px rgba(224,54,139,.18), 0 0 0 1px rgba(224,54,139,.06); --dots:#f3b8d2;
+  --side-on-bg:rgba(224,54,139,.12); --side-on-fg:#b01c68; --tag-bg:rgba(184,110,12,.14); --icon-bg:rgba(224,54,139,.12);
+  --privacy-bg:linear-gradient(135deg,rgba(15,154,118,.08),rgba(224,54,139,.09)); --dl-bg:radial-gradient(600px 300px at 50% 0, rgba(224,54,139,.14), transparent 70%); --code-bg:rgba(224,54,139,.08);
+}
+
+/* Переключатель темы: три кружка в шапке (создаёт theme.js внутри любого элемента с классом .themes). */
+.themes { display:flex; align-items:center; gap:8px; }
+.themes .sw { width:20px; height:20px; border-radius:50%; border:2px solid var(--line-hover); padding:0; cursor:pointer; transition:transform .15s, border-color .15s; }
+.themes .sw:hover { transform:scale(1.15); }
+.themes .sw[aria-pressed="true"] { border-color:var(--accent); box-shadow:0 0 0 2px var(--bg), 0 0 0 4px var(--accent); }
+.themes .sw-dark { background:linear-gradient(135deg,#0b0f18 50%,#4f8cff 50%); }
+.themes .sw-light { background:linear-gradient(135deg,#f6f8fc 50%,#2563eb 50%); }
+.themes .sw-pink { background:linear-gradient(135deg,#fff4f8 50%,#e0368b 50%); }

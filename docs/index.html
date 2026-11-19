@@ -7,6 +7,8 @@
 <meta name="theme-color" content="#06080d">
 <title>Ставка — вклады, накопительные счета и портфель в одном окне</title>
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 <meta name="description" content="Ставка: ставки по вкладам и накопительным счетам банков, ваш портфель, анализ «куда переложить деньги» и расчёт дохода после налога. Ваши данные остаются на вашем компьютере. Программа для Windows.">
 <!--
   Страница «Скачать» для GitHub Pages репозитория выпусков. Один файл, без сервера, без внешних шрифтов и библиотек (посетитель ничего не отдаёт сторонним сайтам).
@@ -18,11 +20,7 @@
   Где лежит исходник: основной репозиторий, scripts/release/common/releases-site/; на GitHub Pages — папка docs/ репозитория выпусков.
 -->
 <style>
-  :root {
-    --bg:#06080d; --bg2:#0b0f18; --surface:rgba(255,255,255,.04); --surface2:rgba(255,255,255,.07); --line:rgba(255,255,255,.09);
-    --fg:#f2f5fb; --muted:#9aa5bd; --dim:#6b7690; --accent:#4f8cff; --accent2:#7aa8ff; --ok:#3ddc97; --warn:#f5b84b;
-    --radius:20px;
-  }
+  :root { --radius:20px; } /* Цвета — в theme.css (тёмная, светлая, розовая темы). */
   * { box-sizing:border-box; }
   html { scroll-behavior:smooth; }
   body {
@@ -30,43 +28,42 @@
     font:17px/1.6 "SF Pro Text","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,sans-serif; -webkit-font-smoothing:antialiased;
     padding-left:max(0px,env(safe-area-inset-left)); padding-right:max(0px,env(safe-area-inset-right));
   }
-  .glow { position:fixed; inset:0; z-index:-1; pointer-events:none;
-    background:radial-gradient(900px 520px at 78% -8%, rgba(79,140,255,.20), transparent 62%), radial-gradient(700px 480px at 8% 4%, rgba(61,220,151,.09), transparent 60%); }
+  .glow { position:fixed; inset:0; z-index:-1; pointer-events:none; background:var(--glow); }
   a { color:var(--accent2); text-decoration:none; } a:hover { text-decoration:underline; }
   .wrap { width:100%; max-width:1120px; margin:0 auto; padding-inline:max(20px,env(safe-area-inset-left)) max(20px,env(safe-area-inset-right)); }
   h1,h2,h3 { font-family:"SF Pro Display","Segoe UI Variable Display","Segoe UI",system-ui,sans-serif; letter-spacing:-.025em; text-wrap:balance; margin:0; }
 
   /* шапка */
-  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(1.6) blur(18px); background:rgba(6,8,13,.72); border-bottom:1px solid var(--line); }
+  nav { position:sticky; top:0; z-index:20; backdrop-filter:saturate(1.6) blur(18px); background:var(--nav); border-bottom:1px solid var(--line); }
   nav .wrap { display:flex; align-items:center; gap:24px; height:60px; }
   .brand { display:flex; align-items:center; gap:10px; font-weight:700; color:var(--fg); font-size:1.05rem; }
   .logo { width:28px; height:28px; border-radius:8px; display:block; }
   nav .links { margin-left:auto; display:flex; gap:22px; font-size:.95rem; } nav .links a { color:var(--muted); } nav .links a:hover { color:var(--fg); text-decoration:none; }
-  .pill { display:inline-flex; align-items:center; gap:8px; padding:9px 18px; border-radius:999px; background:var(--fg); color:#06080d; font-weight:650; font-size:.95rem; }
-  .pill:hover { text-decoration:none; background:#fff; }
+  .pill { display:inline-flex; align-items:center; gap:8px; padding:9px 18px; border-radius:999px; background:var(--pill-bg); color:var(--pill-fg); font-weight:650; font-size:.95rem; }
+  .pill:hover { text-decoration:none; background:var(--pill-hover); }
 
   /* первый экран */
   .hero { padding-block:84px 40px; text-align:center; }
   .eyebrow { display:inline-flex; gap:8px; align-items:center; padding:6px 14px; border:1px solid var(--line); border-radius:999px; background:var(--surface); color:var(--muted); font-size:.88rem; }
   .eyebrow i { width:7px; height:7px; border-radius:50%; background:var(--ok); box-shadow:0 0 12px var(--ok); }
   .hero h1 { font-size:clamp(2.5rem,7vw,5rem); line-height:1.04; margin:22px auto 0; max-width:17ch; font-weight:750; }
-  .hero h1 em { font-style:normal; background:linear-gradient(100deg,#7aa8ff,#3ddc97); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero h1 em { font-style:normal; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .hero .lead { color:var(--muted); font-size:clamp(1.05rem,2vw,1.28rem); max-width:44rem; margin:22px auto 0; }
   .cta { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:34px; }
-  .btn { display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border-radius:14px; font-weight:650; font-size:1.05rem; color:#fff; background:linear-gradient(180deg,#5a97ff,#3f78e8); box-shadow:0 10px 36px rgba(79,140,255,.35), inset 0 1px 0 rgba(255,255,255,.25); }
+  .btn { display:inline-flex; align-items:center; gap:10px; padding:15px 28px; border-radius:14px; font-weight:650; font-size:1.05rem; color:var(--btn-fg); background:var(--btn-bg); box-shadow:var(--btn-shadow); }
   .btn:hover { text-decoration:none; filter:brightness(1.08); }
   .btn.ghost { background:var(--surface2); box-shadow:none; border:1px solid var(--line); color:var(--fg); }
   .meta { margin-top:16px; color:var(--dim); font-size:.9rem; } .meta b { color:var(--ok); font-weight:600; }
 
   /* окно программы (нарисовано разметкой, данные вымышленные) */
   .stage { margin-top:56px; perspective:1600px; }
-  .win { max-width:960px; margin:0 auto; border-radius:18px; border:1px solid var(--line); background:linear-gradient(180deg,#0f1522,#0a0e17); overflow:hidden;
-    box-shadow:0 40px 120px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.03), 0 0 140px rgba(79,140,255,.16); text-align:left; transform:rotateX(4deg); transform-origin:50% 0; }
+  .win { max-width:960px; margin:0 auto; border-radius:18px; border:1px solid var(--line); background:var(--win-bg); overflow:hidden;
+    box-shadow:var(--win-shadow); text-align:left; transform:rotateX(4deg); transform-origin:50% 0; }
   .win .bar { display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--line); color:var(--muted); font-size:.85rem; }
-  .dots { display:flex; gap:6px; } .dots span { width:11px; height:11px; border-radius:50%; background:#2a3347; }
+  .dots { display:flex; gap:6px; } .dots span { width:11px; height:11px; border-radius:50%; background:var(--dots); }
   .win .body { display:grid; grid-template-columns:170px 1fr; min-height:340px; }
   .side { border-right:1px solid var(--line); padding:14px 10px; display:grid; gap:4px; align-content:start; font-size:.9rem; color:var(--muted); }
-  .side div { padding:8px 12px; border-radius:10px; } .side .on { background:rgba(79,140,255,.16); color:#cfe0ff; font-weight:600; }
+  .side div { padding:8px 12px; border-radius:10px; } .side .on { background:var(--side-on-bg); color:var(--side-on-fg); font-weight:600; }
   .main { padding:18px 20px; display:grid; gap:14px; align-content:start; }
   .kpis { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:12px; }
   .kpi { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px; }
@@ -75,7 +72,7 @@
   table.mock { width:100%; border-collapse:collapse; font-size:.86rem; font-variant-numeric:tabular-nums; }
   .mock th { text-align:left; color:var(--dim); font-weight:500; padding:6px 8px; font-size:.74rem; letter-spacing:.05em; text-transform:uppercase; }
   .mock td { padding:8px; border-top:1px solid var(--line); } .mock td:nth-child(3) { color:var(--ok); font-weight:650; }
-  .tag { font-size:.7rem; padding:2px 8px; border-radius:999px; background:rgba(245,184,75,.14); color:var(--warn); margin-left:6px; }
+  .tag { font-size:.7rem; padding:2px 8px; border-radius:999px; background:var(--tag-bg); color:var(--warn); margin-left:6px; }
   .note { text-align:center; margin-top:14px; color:var(--dim); font-size:.82rem; }
 
   /* разделы */
@@ -85,20 +82,20 @@
   .sec-lead { color:var(--muted); max-width:42rem; margin-top:16px; font-size:1.1rem; }
   .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:16px; margin-top:40px; }
   .card { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px; transition:border-color .2s, transform .2s, background .2s; }
-  .card:hover { border-color:rgba(255,255,255,.18); background:var(--surface2); transform:translateY(-2px); }
-  .card .ic { width:40px; height:40px; border-radius:12px; display:grid; place-items:center; font-size:1.2rem; background:rgba(79,140,255,.14); margin-bottom:14px; }
+  .card:hover { border-color:var(--line-hover); background:var(--surface2); transform:translateY(-2px); }
+  .card .ic { width:40px; height:40px; border-radius:12px; display:grid; place-items:center; font-size:1.2rem; background:var(--icon-bg); margin-bottom:14px; }
   .card h3 { font-size:1.2rem; margin-bottom:8px; } .card p { margin:0; color:var(--muted); font-size:.99rem; }
-  .privacy { display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:center; background:linear-gradient(135deg,rgba(61,220,151,.09),rgba(79,140,255,.08)); border:1px solid var(--line); border-radius:28px; padding:clamp(26px,5vw,56px); }
+  .privacy { display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:center; background:var(--privacy-bg); border:1px solid var(--line); border-radius:28px; padding:clamp(26px,5vw,56px); }
   .privacy ul { list-style:none; margin:0; padding:0; display:grid; gap:12px; }
   .privacy li { display:flex; gap:12px; color:var(--muted); } .privacy li::before { content:"✓"; color:var(--ok); font-weight:800; }
 
   /* скачать */
-  .dl { text-align:center; background:radial-gradient(600px 300px at 50% 0, rgba(79,140,255,.18), transparent 70%), var(--surface); border:1px solid var(--line); border-radius:28px; padding:clamp(30px,6vw,64px) 20px; }
+  .dl { text-align:center; background:var(--dl-bg), var(--surface); border:1px solid var(--line); border-radius:28px; padding:clamp(30px,6vw,64px) 20px; }
   .dl h2 { font-size:clamp(1.9rem,4.5vw,3rem); } .dl p { color:var(--muted); max-width:36rem; margin:14px auto 0; }
   table.files { width:100%; border-collapse:collapse; margin-top:28px; font-size:.95rem; text-align:left; }
   .files th,.files td { padding:12px 10px; border-bottom:1px solid var(--line); vertical-align:top; } .files th { color:var(--dim); font-weight:500; font-size:.8rem; letter-spacing:.05em; text-transform:uppercase; }
   .files .soon { color:var(--dim); }
-  code { background:rgba(255,255,255,.07); border:1px solid var(--line); border-radius:7px; padding:1px 7px; font-size:.88em; }
+  code { background:var(--code-bg); border:1px solid var(--line); border-radius:7px; padding:1px 7px; font-size:.88em; }
   .scroll { overflow-x:auto; }
   details { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:4px 22px; margin-top:12px; }
   summary { cursor:pointer; padding:16px 0; font-weight:620; list-style:none; display:flex; justify-content:space-between; gap:12px; } summary::after { content:"+"; color:var(--muted); font-size:1.3rem; line-height:1; } details[open] summary::after { content:"–"; }
@@ -124,6 +121,7 @@
       <a href="#features">Возможности</a>
       <a href="#privacy">Конфиденциальность</a>
       <a href="help/index.html">Справка</a>
+      <span class="themes" role="group" aria-label="Оформление"></span>
       <a class="pill" href="#download">Скачать</a>
     </div>
   </div>
@@ -177,7 +175,8 @@
     <div class="card rv"><div class="ic">🧮</div><h3>Доход и налог</h3><p>Расчёт дохода с капитализацией и оценка налога на проценты по правилам года — с понятным объяснением, как всё посчитано.</p></div>
     <div class="card rv"><div class="ic">📅</div><h3>Выплаты и календарь</h3><p>Когда и сколько придёт на карту. Подтверждайте полученные выплаты и сверяйте с расчётом, чтобы банк не «забыл» проценты.</p></div>
     <div class="card rv"><div class="ic">🛡️</div><h3>Страхование вкладов</h3><p>В России видно, какая часть денег в банке сверх страхового лимита АСВ, — до того, как это станет проблемой.</p></div>
-    <div class="card rv"><div class="ic">💱</div><h3>Валюты и курсы</h3><p>Калькулятор валют по официальным курсам центробанков: сколько ваши рубли в долларах, евро или тенге. Итог портфеля можно показать в любой валюте.</p></div>
+    <!-- Покажем после выпуска версии с калькулятором валют (1.791.0 и новее): сейчас в скачиваемой версии его ещё нет.
+    <div class="card rv"><div class="ic">💱</div><h3>Валюты и курсы</h3><p>Калькулятор валют по официальным курсам центробанков: сколько ваши рубли в долларах, евро или тенге. Итог портфеля можно показать в любой валюте.</p></div> -->
     <div class="card rv"><div class="ic">🌍</div><h3>Страны и языки</h3><p>Россия, Беларусь, Молдова, Казахстан — со своей валютой. Интерфейс на русском, английском, белорусском, румынском и казахском.</p></div>
   </div>
 </section>
